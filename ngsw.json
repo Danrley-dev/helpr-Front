@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1656613528946,
+  "timestamp": 1656614007790,
   "index": "https://Danrley-dev.github.io/helpr-front/index.html",
   "assetGroups": [
     {
@@ -106,7 +106,7 @@
     "https://Danrley-dev.github.io/helpr-front/assets/img/txt5.jpeg": "23d91ec25d2391bfbb8fe17ec3cf6380bd8ccf5c",
     "https://Danrley-dev.github.io/helpr-front/common.5a869e27fd2ef391.js": "4558dae65faf3012914d4ca955c06535cdde8a1e",
     "https://Danrley-dev.github.io/helpr-front/favicon.ico": "45af89e0378c2fa93d369071783f804e6f5dbe83",
-    "https://Danrley-dev.github.io/helpr-front/index.html": "5ea63e1283073b615a6a26460e0a4e6d040802d9",
+    "https://Danrley-dev.github.io/helpr-front/index.html": "0082ad25bb26da10d65297448bead830f549632e",
     "https://Danrley-dev.github.io/helpr-front/main.19e5fdac29d32907.js": "bdcbbd2ba5c86c5c277b2dde06c55ebd84bddb9c",
     "https://Danrley-dev.github.io/helpr-front/manifest.webmanifest": "44249ece9fe5e65a2bd718d59e0439c2ac56eab6",
     "https://Danrley-dev.github.io/helpr-front/polyfills.d722e5904df0910a.js": "59052c2c72afb796e12380936e6be3cd3131ce3e",
