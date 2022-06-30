@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Tecnico } from 'src/app/core/models/pessoa';
@@ -21,7 +21,7 @@ export class TecnicoCreateComponent implements OnInit {
   });
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private tecnicosService: TecnicosService,
     private toast: HotToastService,
     private router: Router

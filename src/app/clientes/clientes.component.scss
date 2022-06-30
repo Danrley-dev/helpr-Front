@@ -1,8 +1,22 @@
-table {
-  width: 100%;
+.table-wrapper{
+    overflow-x: auto;
 }
 
-.table-wrapper {
-  width: 100%;
-  overflow-x: auto;
+.mat-header-cell{
+    align-items:center;
+    min-width: 170px;
+}
+.mouseIndicator:hover{
+    cursor: pointer;
+    }
+
+.buttonfab{
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 12%;
+        margin-top: 15px;
+        padding-bottom:15px ;
+        position:sticky;
+        bottom:0;
+         z-index: 1;
 }

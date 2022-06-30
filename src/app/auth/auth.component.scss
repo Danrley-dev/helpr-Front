@@ -1,8 +1,50 @@
+.fundo {
+  background-image: url("/assets/img/txt5.jpeg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background: color #d9d9d9;
+  height: 100%;
+  flex-direction: column;
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  box-shadow: 1px 5px 5px 5px rgb(66, 28, 85);
+  border-radius: 10px;
+  max-height: 1000px;
+  max-width: 800px;
+  width: 300px;
+  height: 450px;
+  margin-top: 80px;
+  padding-left: 3%;
+  background-color: white;
+  margin-right: 35.5%;
+}
+
+.align {
+  width: 87%;
+}
+
 .form-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  margin-left: 80px;
+  margin-right: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .form-wrapper {
+    margin-right: 0;
+  }
+
+  .fundo {
+    background-size: cover;
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { AuthService } from '../core/services/auth/auth.service';
@@ -11,16 +12,19 @@ import { AuthService } from '../core/services/auth/auth.service';
 })
 export class AuthComponent implements OnInit {
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private authService: AuthService,
     private router: Router,
-    private toast: HotToastService
+    private toast: HotToastService,
+    private titleService: Title
   ) {}
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     senha: ['', [Validators.required]],
   });
+
+  ocultar = true;
 
   onSubmit() {
     const { email, senha } = this.loginForm.value;
@@ -33,6 +37,7 @@ export class AuthComponent implements OnInit {
         const token = response.headers.get('Authorization');
         this.authService.onLogin(token!.substring(7));
         this.router.navigate(['/']);
+        this.toast.success('Seja bem-vindo(a)!');
       },
       error: (err) => {
         this.toast.error('Email/senha inválido(s)');
@@ -41,5 +46,7 @@ export class AuthComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.titleService.setTitle('Login');
+  }
 }

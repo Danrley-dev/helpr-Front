@@ -4,6 +4,7 @@
 
 .sidenav {
   width: 200px;
+  justify-content: center;
 }
 
 .sidenav .mat-toolbar {
@@ -20,8 +21,9 @@
   display: flex;
 }
 
-.menu-label {
-  padding-left: 6px;
+.brand img {
+  height: 62px;
+  width: 70px;
 }
 
 .selected {
@@ -30,4 +32,36 @@
 
 .logo {
   justify-content: center;
+}
+
+.email {
+  display: flex;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.redes-sociais {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.token_date {
+  margin-left: 5px;
+  display: flex;
+  font-size: 13px;
+}
+
+.mat-menu-item {
+  width: unset;
+  height: unset;
+  line-height: unset;
+  padding: 10px 10px;
 }

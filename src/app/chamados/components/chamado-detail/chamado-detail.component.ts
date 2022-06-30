@@ -1,23 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { EMPTY, Observable } from 'rxjs';
 import { Chamado } from 'src/app/core/models/chamado';
+import { Cliente, Tecnico } from 'src/app/core/models/pessoa';
 import { ChamadosService } from 'src/app/core/services/chamados/chamados.service';
 
 @Component({
   selector: 'app-chamado-detail',
   templateUrl: './chamado-detail.component.html',
-  styleUrls: ['./chamado-detail.component.scss']
+  styleUrls: ['./chamado-detail.component.scss'],
 })
 export class ChamadoDetailComponent implements OnInit {
   errorMsg = '';
   error = false;
-  loading = false;
+  loading = true;
   chamado: Chamado = {} as Chamado;
 
   constructor(
-    private chamadosService: ChamadosService, 
-    private route: ActivatedRoute
-    ) { }
+    private chamadosService: ChamadosService,
+    private route: ActivatedRoute,
+    private titleService: Title
+    
+  ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
@@ -25,7 +30,7 @@ export class ChamadoDetailComponent implements OnInit {
       next: (chamado) => {
         this.chamado = chamado;
         this.loading = false;
-        console.log(chamado)
+        this.titleService.setTitle('Detalhes do chamado');
       },
       error: (err) => {
         this.errorMsg = err.error.message;
@@ -35,5 +40,4 @@ export class ChamadoDetailComponent implements OnInit {
       }
     })
   }
-
 }
