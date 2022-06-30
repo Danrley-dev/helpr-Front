@@ -40,6 +40,7 @@ export class AuthComponent implements OnInit {
         this.toast.success('Seja bem-vindo(a)!');
       },
       error: (err) => {
+        window.navigator?.vibrate?.(200);
         this.toast.error('Email/senha inválido(s)');
         ref.close();
       },
