@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, UntypedFormBuilder } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Tecnico } from 'src/app/core/models/pessoa';
@@ -28,9 +29,10 @@ export class TecnicoUpdateComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private tecnicosService: TecnicosService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private toast: HotToastService,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) {}
 
   onSubmit() {
@@ -72,6 +74,7 @@ export class TecnicoUpdateComponent implements OnInit {
         this.tecnicoForm.patchValue(tecnico);
         this.tecnicoForm.get('perfils')?.setValue(perfils);
         this.loading = false;
+        this.titleService.setTitle('Editar técnico');
       },
       error: (err) => {
         this.errorMsg = err.error.message;

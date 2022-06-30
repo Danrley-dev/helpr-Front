@@ -1,3 +1,4 @@
+
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
     #drawer
@@ -5,10 +6,23 @@
     fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false"
+    [opened]="(isHandset$ | async) === true"
   >
     <mat-toolbar class="logo"><img src="assets/img/txt1.png" width="112" /></mat-toolbar>
     <mat-nav-list>
+      <a class="menu-label" mat-list-item [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>Suas informações
+      </a>
+      <mat-menu #menu="matMenu">
+        <span mat-menu-item> <span class="mat-caption email email-role"><b>Perfil: </b> {{roleUser}}</span> </span>
+        <span mat-menu-item><span class="mat-caption email"><b>Email:</b>{{emailUser}}</span></span>
+        <span mat-menu-item>
+          <div class="token_date">
+            <span><b>Sessão expira em:</b>
+              {{tokenExpirationDate | date: "dd/MM/YYYY"}}</span>
+          </div>
+        </span>
+      </mat-menu>
       <a
         mat-list-item
         *ngFor="let item of itensMenu"
@@ -18,25 +32,42 @@
         <mat-icon>{{ item.icon }}</mat-icon>
         <span class="menu-label">{{ item.label }}</span>
       </a>
-      <a mat-list-item (click)="logout()">
+      <a mat-list-item *ngIf="userAdmin" [routerLink]="['/admin']">
+        <mat-icon>admin_panel_settings</mat-icon>
+        <span class="menu-label">Administrar</span>
+      </a>
+      <a mat-list-item (click)="logout()" 
+      matTooltip="Click para sair"
+      matTooltipPosition="below"
+      matTooltipShowDelay="1000">
         <mat-icon>logout</mat-icon>
         <span class="menu-label">Sair</span>
       </a>
     </mat-nav-list>
+    <div class="redes-sociais">
+      <a href="https://twitter.com/SoulCodeAcademy?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" target="_blank" ><img src='assets\img\icons8-twitter-24.png'/></a>
+      <a href="http://www.instagram.com/SoulCodeAcademy/" target="_blank"><img src='assets\img\icons8-instagram-24.png'/></a>
+      <a href="https://www.facebook.com/SoulCodeAcademy/" target="_blank" ><img src='assets\img\icons8-facebook-novo-24.png'/></a>
+      <a href="https://br.linkedin.com/company/soulcodeacademy" target="_blank"><img src='assets\img\icons8-linkedin-24.png'/></a>
+    </div>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async"
-      >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span class="brand"><img src="assets/img/quad1.png" width="48" /></span>
-    </mat-toolbar>
+      <mat-toolbar color="primary">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+        >
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <a routerLink="/home">
+          <span class="brand"
+            ><img
+              src="https://raw.githubusercontent.com/victoricoma/helpr/main/img/logoQuadrado/3.png"
+              width="48" /></span
+        ></a>
+      </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

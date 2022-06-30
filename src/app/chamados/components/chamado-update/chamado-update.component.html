@@ -1,17 +1,12 @@
-<div class="form-wrapper" *ngIf="!loading && !error; else loadingOrError">
+<div class="reduction">
+  <div class="img" id="q1"></div>
+  <div class="form-wrapper container" *ngIf="!loading && !error; else loadingOrError">
     <form [formGroup]="chamadoForm" (ngSubmit)="onSubmit()">
       <h2>Editar chamado</h2>
       <mat-form-field appearance="fill">
         <mat-label>Título</mat-label>
-        <input
-          matInput
-          placeholder="Título do chamado"
-          formControlName="titulo"
-          required
-        />
-        <mat-error *ngIf="chamadoForm.get('titulo')?.errors?.['required']"
-          >Campo obrigatório</mat-error
-        >
+        <input matInput placeholder="Título do chamado" formControlName="titulo" required />
+        <mat-error *ngIf="chamadoForm.get('titulo')?.errors?.['required']">Campo obrigatório</mat-error>
         <mat-icon matPrefix>assignment</mat-icon>
       </mat-form-field>
       <mat-form-field appearance="fill">
@@ -21,9 +16,7 @@
           <mat-option [value]="1">EM ANDAMENTO</mat-option>
           <mat-option [value]="2">ENCERRADO</mat-option>
         </mat-select>
-        <mat-error *ngIf="chamadoForm.get('status')?.errors?.['required']"
-          >Campo obrigatório</mat-error
-        >
+        <mat-error *ngIf="chamadoForm.get('status')?.errors?.['required']">Campo obrigatório</mat-error>
         <mat-icon matPrefix>check_circle</mat-icon>
       </mat-form-field>
       <mat-form-field appearance="fill">
@@ -34,56 +27,42 @@
           <mat-option [value]="2">ALTA</mat-option>
         </mat-select>
         <mat-icon matPrefix>check_circle</mat-icon>
-        <mat-error *ngIf="chamadoForm.get('prioridade')?.errors?.['required']"
-          >Campo obrigatório</mat-error
-        >
+        <mat-error *ngIf="chamadoForm.get('prioridade')?.errors?.['required']">Campo obrigatório</mat-error>
       </mat-form-field>
-  
+
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Selecione um técnico</mat-label>
         <mat-select name="tecnico" formControlName="tecnico" required>
           <mat-option *ngFor="let tec of tecnicos$ | async" [value]="tec.id">{{
             tec.nome
-          }}</mat-option>
+            }}</mat-option>
         </mat-select>
         <mat-icon matPrefix>engineering</mat-icon>
       </mat-form-field>
-  
+
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Selecione um cliente</mat-label>
         <mat-select name="cliente" formControlName="cliente" required>
-          <mat-option
-            *ngFor="let cliente of clientes$ | async"
-            [value]="cliente.id"
-            >{{ cliente.nome }}</mat-option
-          >
+          <mat-option *ngFor="let cliente of clientes$ | async" [value]="cliente.id">{{ cliente.nome }}</mat-option>
         </mat-select>
         <mat-icon matPrefix>people</mat-icon>
       </mat-form-field>
-  
+
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Deixe uma observação</mat-label>
-        <textarea
-          name="observacoes"
-          formControlName="observacoes"
-          required
-          class="observacoes"
-          matInput
-          placeholder="Ex. trocar bateria de notebook queimada..."
-        ></textarea>
+        <textarea name="observacoes" formControlName="observacoes" required class="observacoes" matInput
+          placeholder="Ex. trocar bateria de notebook queimada..."></textarea>
         <mat-icon matPrefix>assignment</mat-icon>
       </mat-form-field>
-  
-      <button mat-raised-button color="primary" [disabled]="chamadoForm.invalid">
+
+      <button mat-raised-button color="primary"
+        [disabled]="chamadoForm.invalid || resultadoCliente === false && resultadoTecnico === false">
         Editar
       </button>
     </form>
   </div>
-  
-  <ng-template #loadingOrError>
-    <app-loader
-      *ngIf="loading"
-      label="Carregando registro de chamado..."
-    ></app-loader>
-    <p *ngIf="error">{{ errorMsg }}</p>
-  </ng-template>
+</div>
+<ng-template #loadingOrError>
+  <app-loader *ngIf="loading" label="Carregando registro de chamado..."></app-loader>
+  <p *ngIf="error">{{ errorMsg }}</p>
+</ng-template>

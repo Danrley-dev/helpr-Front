@@ -1,7 +1,37 @@
-img {
-    width: 100%;
+.conteiner{
+    display: flex;
+    align-items: left;
+    justify-content: space-between;
+    flex-wrap: wrap;
+   
 }
-.home-container {
-    padding: 8px;
-    text-align: justify;
+p {
+    padding: 20px;
+    margin: 0;
+  }
+
+.banner4{
+    width: 90%;
+    padding-top: 10%;
+    height: 100%;
+}
+.banner5{
+    object-fit: cover;
+    width: 100%;
+    padding-top: 15%;
+    
+}
+.banner6{
+        width: 100%;
+        margin-bottom: 3%;
+        margin-top: 6%;
+}
+.footer{
+    background-color: #673AB7;
+    color: white;
+}
+.footer1{
+    background-color: #d5c9ec;
+    color: #673AB7;
+
 }

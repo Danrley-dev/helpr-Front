@@ -1,3 +1,4 @@
+import { TecnicoDetailComponent } from './components/tecnico-detail/tecnico-detail.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TecnicoCreateComponent } from './components/tecnico-create/tecnico-create.component';
@@ -8,6 +9,7 @@ const routes: Routes = [
   { path: '', component: TecnicosComponent },
   { path: 'new', component: TecnicoCreateComponent },
   { path: 'edit/:id', component: TecnicoUpdateComponent },
+  { path: 'perfil/:id', component: TecnicoDetailComponent },
 ];
 
 @NgModule({

@@ -9,6 +9,7 @@ import { Chamado } from '../../models/chamado';
 })
 export class ChamadosService {
   chamadosUrl = `${API_CONFIG.baseUrl.prod}/service/chamados`;
+  chamadosRelatorio = `${this.chamadosUrl}/relatorios`;
 
   constructor(private http: HttpClient) {}
 
@@ -19,6 +20,10 @@ export class ChamadosService {
   findById(id: number): Observable<Chamado> {
     return this.http.get<Chamado>(`${this.chamadosUrl}/${id}`);
   }
+  findReportChamadoCliente(id: number){
+    return this.http.get<Chamado[]>(`${this.chamadosRelatorio}/cliente/${id}`)
+      }
+
 
   create(chamado: Chamado) {
     return this.http.post(this.chamadosUrl, chamado);

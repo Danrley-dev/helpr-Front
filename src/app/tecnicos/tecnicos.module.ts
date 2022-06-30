@@ -6,19 +6,24 @@ import { TecnicosComponent } from './tecnicos.component';
 import { MaterialModule } from '../shared/material.module';
 import { TecnicoUpdateComponent } from './components/tecnico-update/tecnico-update.component';
 import { TecnicoCreateComponent } from './components/tecnico-create/tecnico-create.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { NgxMaskModule } from 'ngx-mask';
+import { TecnicoDetailComponent } from './components/tecnico-detail/tecnico-detail.component';
+import { TecnicoDeleteComponent } from './components/tecnico-delete/tecnico-delete.component';
 
 @NgModule({
   declarations: [
     TecnicosComponent,
     TecnicoUpdateComponent,
     TecnicoCreateComponent,
+    TecnicoDetailComponent,
+    TecnicoDeleteComponent,
   ],
   imports: [
     CommonModule,
     TecnicosRoutingModule,
+    FormsModule,
     MaterialModule,
     ReactiveFormsModule,
     SharedModule,

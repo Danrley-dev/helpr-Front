@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Cliente } from 'src/app/core/models/pessoa';
@@ -28,9 +29,10 @@ export class ClienteUpdateComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private clientesService: ClientesService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private toast: HotToastService,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) {}
 
   onSubmit() {
@@ -72,6 +74,7 @@ export class ClienteUpdateComponent implements OnInit {
         this.clienteForm.patchValue(cliente);
         this.clienteForm.get('perfils')?.setValue(perfils);
         this.loading = false;
+        this.titleService.setTitle('Editar cliente');
       },
       error: (err) => {
         this.errorMsg = err.error.message;

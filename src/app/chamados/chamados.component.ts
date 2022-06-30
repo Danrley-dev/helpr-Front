@@ -6,11 +6,12 @@ import { ChamadosService } from '../core/services/chamados/chamados.service';
 @Component({
   selector: 'app-chamados',
   templateUrl: './chamados.component.html',
-  styleUrls: ['./chamados.component.scss']
+  styleUrls: ['./chamados.component.scss'],
 })
 export class ChamadosComponent implements OnInit {
   chamados$: Observable<Chamado[]> = EMPTY;
-  constructor(private chamadosService: ChamadosService) { }
+
+  constructor(private chamadosService: ChamadosService) {}
 
   displayedColumns: string[] = [
     'id',
@@ -19,10 +20,9 @@ export class ChamadosComponent implements OnInit {
     'prioridade',
     'observacoes',
     'acoes',
-  ]
+  ];
 
   ngOnInit(): void {
     this.chamados$ = this.chamadosService.findAll();
   }
-
 }

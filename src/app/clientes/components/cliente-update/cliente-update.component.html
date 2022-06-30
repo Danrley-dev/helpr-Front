@@ -1,4 +1,6 @@
-<div class="form-wrapper" *ngIf="!loading && !error; else loadingOrError">
+<div class="reduction">
+  <div class="img" id="q1"></div>
+  <div class="form-wrapper container" *ngIf="!loading && !error; else loadingOrError">
     <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
       <h2>Editar cliente</h2>
       <section formArrayName="perfils" class="section">
@@ -84,11 +86,11 @@
       </button>
     </form>
   </div>
-  
-  <ng-template #loadingOrError>
-    <app-loader
-      *ngIf="loading"
-      label="Carregando registro de cliente..."
-    ></app-loader>
-    <p *ngIf="error">{{errorMsg}}</p>
-  </ng-template>
+</div>
+<ng-template #loadingOrError>
+  <app-loader
+    *ngIf="loading"
+    label="Carregando registro de cliente..."
+  ></app-loader>
+  <p *ngIf="error">{{ errorMsg }}</p>
+</ng-template>

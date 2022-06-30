@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
-import { EMPTY, Observable } from 'rxjs';
+import { EMPTY, Observable} from 'rxjs';
 import { Cliente } from '../core/models/pessoa';
 import { ClientesService } from '../core/services/clientes/clientes.service';
+import { ClienteAbertoComponent } from './components/cliente-aberto/cliente-aberto.component';
+import { ClienteDeleteComponent } from './components/cliente-delete/cliente-delete.component';
+import { ClienteDetailComponent } from './components/cliente-detail/cliente-detail.component';
 
 @Component({
   selector: 'app-clientes',
@@ -16,40 +21,63 @@ export class ClientesComponent implements OnInit {
     'email',
     'cpf',
     'dataCriacao',
+    'detalhe',
     'acoes', // btn -> editar e deletar
   ];
 
   clientes$: Observable<Cliente[]> = EMPTY;
 
+
   constructor(
     private clientesService: ClientesService,
-    private toast: HotToastService
+    private toast: HotToastService,
+    private dialog : MatDialog,
+    private router: Router,
   ) {}
 
-  delete(id: number) {
-    const canDelete = confirm('Tem certeza?');
+  onClickDelete(cliente: Cliente, id: number) {
+    const ref = this.dialog.open(ClienteDeleteComponent, {
+      minWidth: '400px',
+      data: cliente,
+    });
+    ref.afterClosed().subscribe({
+      next: (result) => {
+        if (result) {
+          this.clientesService.delete(id).subscribe({
+            next: () => {
+              this.clientes$ = this.clientesService.findAll();
+              this.toast.success('Usuário deletado');
+              ref.close();
+            },
+            error: (err) => {
+              ref.close();
+              switch (err.status) {
+                case 403:
+                  return this.toast.error('Usuário não tem permissão');
+                case 409:
+                  return this.toast.error(err.error.message);
+                default:
+                  return this.toast.error('Um erro aconteceu');
+              }
+            },
+          });
+        }
+      },
+    });
+  }
+ onClickCliente(id: number){
+    const chamadosClientes = this.dialog.open(ClienteAbertoComponent,{
+      data: id,
+      width: '950px'
+    });
+    console.log(id)
+  }
 
-    if (canDelete) {
-      const ref = this.toast.loading('Deletando usuário');
-
-      this.clientesService.delete(id).subscribe({
-        next: () => {
-          this.toast.success('Usuário deletado');
-          ref.close();
-        },
-        error: (err) => {
-          ref.close();
-          switch (err.status) {
-            case 403:
-              return this.toast.error('Usuário não tem permissão');
-            case 409:
-              return this.toast.error(err.error.message);
-            default:
-              return this.toast.error('Um erro aconteceu');
-          }
-        },
-      });
-    }
+  openDialog(tecnico: Cliente): void {
+    this.dialog.open(ClienteDetailComponent, {
+     width: '500px',
+     data: { ...tecnico },
+   });
   }
 
   ngOnInit(): void {

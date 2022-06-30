@@ -3,7 +3,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '../../services/auth/auth.service';
-import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 
 interface MenuItem {
   link: string;
@@ -17,6 +18,7 @@ interface MenuItem {
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  userAdmin!: boolean;
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
@@ -27,12 +29,43 @@ export class HeaderComponent {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authService: AuthService,
-    private router: Router
-  ) {}
+    private dialog: MatDialog,
+  ) { }
+  tokenExpirationDate!: Date | null;
+  role = this.authService.userRole();
 
-  logout() {
-    this.authService.onLogout();
-    this.router.navigate(['/auth']);
+  get emailUser() {
+    return this.authService.emailUser;
+  }
+
+  get roleUser() {
+    return this.authService.roleUser;
+  }
+
+  isAdmin() {
+    const containsAdmin = this.authService.userInfo().subscribe(res => {
+       const perfilsBolean = Object.keys(res.perfils).map(function (key: any) {
+         if (res.perfils[key] == 'ADMIN') {
+           return true
+         }
+         return false;
+       })
+       this.userAdmin = perfilsBolean.includes(true);
+     
+})
+   }
+  ngOnInit(): void {
+    this.tokenExpirationDate = this.authService.getTokenExpirationDate();
+    this.isAdmin();
+  }
+
+  logout(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '250px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
   itensMenu: MenuItem[] = [
@@ -55,6 +88,11 @@ export class HeaderComponent {
       link: '/tecnicos',
       label: 'Técnicos',
       icon: 'engineering',
+    },
+    {
+      link: '/manual-do-software',
+      label: 'Manual do Software',
+      icon: 'list_alt',
     },
   ];
 }

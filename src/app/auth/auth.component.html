@@ -1,39 +1,30 @@
-<div class="form-wrapper form-container">
-  <img src="assets/img/ext1.png" width="256px" />
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="fill">
-      <mat-label>Email</mat-label>
-      <input
-        matInput
-        placeholder="Email do cliente"
-        formControlName="email"
-        type="email"
-        required
-      />
-      <mat-error *ngIf="loginForm.get('email')?.errors?.['required']"
-        >Campo obrigatório</mat-error
-      >
-      <mat-icon matPrefix>email</mat-icon>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Senha</mat-label>
-      <input
-        matInput
-        placeholder="Senha do cliente"
-        formControlName="senha"
-        type="password"
-        required
-      />
-      <mat-error *ngIf="loginForm.get('senha')?.errors?.['required']"
-        >Campo obrigatório</mat-error
-      >
-      <mat-error *ngIf="loginForm.get('senha')?.errors?.['minlength']"
-        >O mínimo são 8 caracteres</mat-error
-      >
-      <mat-icon matPrefix>key</mat-icon>
-    </mat-form-field>
-    <button mat-raised-button color="primary" [disabled]="loginForm.invalid">
-      Login
-    </button>
-  </form>
+<div class="fundo">
+  <div class="form-container">
+    <div class="form-wrapper">
+      <img src="assets/img/ext1.png" width="256px" />
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email do cliente" formControlName="email" type="email" required />
+          <mat-error *ngIf="loginForm.get('email')?.errors?.['required']">Campo obrigatório</mat-error>
+          <mat-icon matPrefix>email</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="align" appearance="fill">
+          <mat-label>Senha</mat-label>
+          <input matInput [type]="ocultar ? 'password' : 'text'" placeholder="Senha do cliente" formControlName="senha"
+            type="text" required />
+          <mat-error *ngIf="loginForm.get('senha')?.errors?.['required']">Campo obrigatório</mat-error>
+          <mat-error *ngIf="loginForm.get('senha')?.errors?.['minlength']">O mínimo são 8 caracteres</mat-error>
+          <mat-icon matPrefix>key</mat-icon>
+          <button type="button" mat-icon-button matSuffix (click)="ocultar = !ocultar"
+            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="ocultar">
+            <mat-icon>{{ocultar ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <button class="button" mat-raised-button color="primary" [disabled]="loginForm.invalid">
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
 </div>
